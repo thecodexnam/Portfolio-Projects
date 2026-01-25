@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { createContext } from 'react'
+const DataContext = createContext()
 
-const UserContext = () => {
+const UserContext = ({children}) => {
   return (
     <div>
-        <h1>Hi, I'm User Context</h1>
+        {children}
     </div>
   )
 }

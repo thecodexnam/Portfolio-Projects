@@ -10,7 +10,7 @@ const GoogleAi = new GoogleGenAI({
 async function main (){
   const response = await GoogleAi.models.generateContent({
     model:"gemini-2.5-flash",
-    contents:"Aur Kasin ho bhai",
+    contents:"Is Computer Science is good carrier",
   })
   console.log(response.text);
 }
