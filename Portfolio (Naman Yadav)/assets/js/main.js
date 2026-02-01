@@ -1,3 +1,4 @@
+
 /*=============== HOME SPLIT TEXT ===============*/
 const {animate, text, stagger} = anime;
 
@@ -76,9 +77,30 @@ const swiperProjects = new Swiper('.projects__swiper', {
 
 
 /*=============== SERVICES ACCORDION ===============*/
-const servicesButton = document.querySelectorAll('.services_-button')
+const servicesButton = document.querySelectorAll('.services__button')
 
+servicesButton.forEach(button => {
+    // Add your height to service info
+    const heightInfo = document.querySelector('.service__info')
+    heightInfo.style.height = heightInfo.scrollHeight + 'px'
 
+    button.addEventListener('click', ()=>{
+        const servicesCards = document.querySelector('.services__card')
+                currentCard = button.parentNode,
+                currentInfo = currentCard.querySelector('.services__info')
+                isCardOpen = currentCard.classList.contains('.services-open')
+
+        //Class all other service info
+        servicesCards.forEach(card => {
+            card.classList.replace('.services-open', '.services-close')
+
+            const info = card.querySelector('.services__info')
+                  info.style.height = '0'
+        })
+
+        //Open only if not already open
+    })
+})
 
 /*=============== TESTIMONIALS OF DUPLICATE CARDS ===============*/
 
