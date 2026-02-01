@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import type { Snack, Student, Order } from "../data/mockData";
 import { initialSnacks } from "../data/mockData";
+import type { Snack, Student, Order } from "../data/mockData";
 
+// 🔹 Context Type
 type AppContextType = {
   snacks: Snack[];
   students: Student[];
@@ -12,87 +13,73 @@ type AppContextType = {
 
 const AppContext = createContext<AppContextType | null>(null);
 
-// 🔹 Helper functions (simple & readable)
-const getFromStorage = <T,>(key: string, defaultValue: T): T => {
-  const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : defaultValue;
-};
-
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  // 🔹 Load initial data from localStorage
+  // 🔹 Load from localStorage or fallback
   const [snacks, setSnacks] = useState<Snack[]>(
-    () => getFromStorage("snacks", initialSnacks)
+    JSON.parse(localStorage.getItem("snacks") || "null") || initialSnacks
   );
 
   const [students, setStudents] = useState<Student[]>(
-    () => getFromStorage("students", [])
+    JSON.parse(localStorage.getItem("students") || "[]")
   );
 
   const [orders, setOrders] = useState<Order[]>(
-    () => getFromStorage("orders", [])
+    JSON.parse(localStorage.getItem("orders") || "[]")
   );
 
-  // 🔹 Save to localStorage whenever data changes
+  // 🔹 Save everything to localStorage
   useEffect(() => {
     localStorage.setItem("snacks", JSON.stringify(snacks));
-  }, [snacks]);
-
-  useEffect(() => {
     localStorage.setItem("students", JSON.stringify(students));
-  }, [students]);
-
-  useEffect(() => {
     localStorage.setItem("orders", JSON.stringify(orders));
-  }, [orders]);
+  }, [snacks, students, orders]);
 
   // ✅ Add Student
   const addStudent = (name: string) => {
-    const newStudent: Student = {
-      id: Date.now(),
-      name,
-      referralCode: "REF" + Math.floor(Math.random() * 10000),
-      totalSpent: 0
-    };
-
-    setStudents(prev => [...prev, newStudent]);
+    setStudents([
+      ...students,
+      {
+        id: Date.now(),
+        name,
+        referralCode: "REF" + Math.floor(Math.random() * 10000),
+        totalSpent: 0
+      }
+    ]);
   };
 
   // ✅ Place Order
   const placeOrder = (studentId: number, snackId: number, quantity: number) => {
-    const snack = snacks.find(s => s.id === snackId);
+    const snack = snacks.find(snack => snack.id === snackId);
     if (!snack) return;
 
     const totalAmount = snack.price * quantity;
 
-    const newOrder: Order = {
-      id: Date.now(),
-      studentId,
-      snackId,
-      quantity,
-      totalAmount,
-      date: new Date().toLocaleString()
-    };
-
-    // Save order
-    setOrders(prev => [...prev, newOrder]);
+    // Add order
+    setOrders([
+      ...orders,
+      {
+        id: Date.now(),
+        studentId,
+        snackId,
+        quantity,
+        totalAmount,
+        date: new Date().toLocaleString()
+      }
+    ]);
 
     // Update student spending
-    setStudents(prev =>
-      prev.map(student =>
-        student.id === studentId
-          ? { ...student, totalSpent: student.totalSpent + totalAmount }
-          : student
-      )
-    );
+    setStudents(students.map(student =>
+      student.id === studentId
+        ? { ...student, totalSpent: student.totalSpent + totalAmount }
+        : student
+    ));
 
     // Update snack order count
-    setSnacks(prev =>
-      prev.map(sn =>
-        sn.id === snackId
-          ? { ...sn, ordersCount: sn.ordersCount + 1 }
-          : sn
-      )
-    );
+    setSnacks(snacks.map(sn =>
+      sn.id === snackId
+        ? { ...sn, ordersCount: sn.ordersCount + 1 }
+        : sn
+    ));
   };
 
   return (
@@ -104,6 +91,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+// 🔹 Custom Hook
 export const useAppContext = () => {
   const context = useContext(AppContext);
   if (!context) {
