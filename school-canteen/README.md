@@ -1,73 +1,189 @@
-# React + TypeScript + Vite
+🧑‍🍳 School Canteen Ordering System (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a basic React + TypeScript frontend project built as part of a Frontend Screening Task.
+The project simulates a school canteen digital ordering system where students can view snacks, place orders, and track their spending.
 
-Currently, two official plugins are available:
+This is a learning/prototype project, not a production-grade application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🎯 Objective
 
-## React Compiler
+The goal of this project is to demonstrate:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Clean React component structure
 
-## Expanding the ESLint configuration
+Basic state management
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Simple form handling and validation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Mock API/data handling
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Good UI/UX practices
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Clear and readable code
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🛠️ Tech Stack Used
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+React (with Vite)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+TypeScript
+
+React Router – for page navigation
+
+React Context API – for global state management
+
+localStorage – for data persistence
+
+Basic CSS / inline styles (kept simple intentionally)
+
+No complex or unnecessary libraries were used to keep the project beginner-friendly and easy to understand.
+
+📦 Features Implemented
+✅ Snacks
+
+View available snacks
+
+Each snack shows:
+
+Name
+
+Price
+
+Order count
+
+Order button for each snack
+
+✅ Students
+
+Create new students
+
+Auto-generate referral codes
+
+View list of students
+
+Track total money spent by each student
+
+✅ Orders
+
+Place orders for students
+
+Select quantity (1–5)
+
+Track order history per student
+
+Automatically updates:
+
+Student’s total spent
+
+Snack’s order count
+
+✅ Persistence
+
+Students, snacks, and orders are stored in localStorage
+
+Data does not disappear on page refresh
+
+📄 Pages in the App
+
+Snacks Page (/)
+
+Students Page (/students)
+
+Student Detail Page (/students/:id)
+
+Create Student Page (/create-student)
+
+🧱 Component Structure
+
+SnackCard – displays individual snack details
+
+StudentItem – displays student summary
+
+OrderForm – handles placing orders
+
+Navbar – navigation between pages
+
+Components are kept small and reusable.
+
+🔄 State Management
+
+Global state is managed using React Context API, which stores:
+
+Snacks
+
+Students
+
+Orders
+
+This keeps data consistent across all pages.
+
+🧪 Mock Data Approach
+
+No real backend is used
+
+Initial snack data is hardcoded
+
+All updates happen in frontend state
+
+localStorage is used to simulate persistence
+
+This approach was chosen to keep the focus on frontend logic and UI behavior.
+
+🧑‍💻 Setup Instructions
+1️⃣ Clone the Repository
+git clone <your-github-repo-url>
+cd school-canteen
+
+2️⃣ Install Dependencies
+npm install
+
+3️⃣ Run the App
+npm run dev
+
+
+The app will be available at:
+
+http://localhost:5173
+
+📁 Project Structure (Simplified)
+src/
+│
+├── components/
+├── pages/
+├── context/
+├── data/
+├── App.tsx
+└── main.tsx
+
+📌 Notes
+
+This project focuses on clarity and understanding, not advanced patterns.
+
+Code is written in a human-readable, beginner-friendly way.
+
+Easy to extend with:
+
+Backend APIs
+
+Authentication
+
+Better UI styling
+
+React Query or Redux
+
+📜 PROMPTS_USED.md
+
+A file named PROMPTS_USED.md is included in the repository, listing the AI prompts used during development, as required by the assignment.
+
+✅ Conclusion
+
+This project successfully demonstrates:
+
+React fundamentals
+
+Component reusability
+
+State and data handling
+
+Clean UI flow
+
+Practical frontend problem-solving
