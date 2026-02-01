@@ -1,4 +1,9 @@
 🧑‍🍳 School Canteen Ordering System (Frontend)
+<img width="1896" height="880" alt="image" src="https://github.com/user-attachments/assets/8af1e3b0-ecd6-4830-8ea1-9e69ebabec8f" />
+<img width="1919" height="912" alt="image" src="https://github.com/user-attachments/assets/22d0970b-9b98-4a24-8625-b819936af9d0" />
+<img width="1919" height="891" alt="image" src="https://github.com/user-attachments/assets/6ed377b0-83f4-4419-a1ca-b389ef9bc955" />
+
+
 
 This is a basic React + TypeScript frontend project built as part of a Frontend Screening Task.
 The project simulates a school canteen digital ordering system where students can view snacks, place orders, and track their spending.
