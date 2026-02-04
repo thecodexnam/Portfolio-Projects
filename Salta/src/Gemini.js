@@ -3,16 +3,16 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+
 const GoogleAi = new GoogleGenAI({
-  apiKey: process.env.API_KEY,
+  apiKey: process.env.API_KEY
 });
 
-async function main (){
+export async function askGemini(prompt) {
   const response = await GoogleAi.models.generateContent({
-    model:"gemini-2.5-flash",
-    contents:"Is Computer Science is good carrier",
-  })
-  console.log(response.text);
-}
+    model: "gemini-2.5-flash",
+    contents: prompt,
+  });
 
-export default main();
+  return response.text;
+}
