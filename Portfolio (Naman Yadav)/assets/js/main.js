@@ -77,30 +77,33 @@ const swiperProjects = new Swiper('.projects__swiper', {
 
 
 /*=============== SERVICES ACCORDION ===============*/
-const servicesButton = document.querySelectorAll('.services__button')
+const servicesButtons = document.querySelectorAll('.services__button')
+const servicesCards = document.querySelectorAll('.services__card')
 
-servicesButton.forEach(button => {
-    // Add your height to service info
-    const heightInfo = document.querySelector('.service__info')
-    heightInfo.style.height = heightInfo.scrollHeight + 'px'
+servicesButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const currentCard = button.parentNode
+    const currentInfo = currentCard.querySelector('.services__info')
+    const isCardOpen = currentCard.classList.contains('services-open')
 
-    button.addEventListener('click', ()=>{
-        const servicesCards = document.querySelector('.services__card')
-                currentCard = button.parentNode,
-                currentInfo = currentCard.querySelector('.services__info')
-                isCardOpen = currentCard.classList.contains('.services-open')
+    // Close all cards
+    servicesCards.forEach(card => {
+      card.classList.remove('services-open')
+      card.classList.add('services-close')
 
-        //Class all other service info
-        servicesCards.forEach(card => {
-            card.classList.replace('.services-open', '.services-close')
-
-            const info = card.querySelector('.services__info')
-                  info.style.height = '0'
-        })
-
-        //Open only if not already open
+      const info = card.querySelector('.services__info')
+      info.style.height = '0'
     })
+
+    // Open clicked card if it was closed
+    if (!isCardOpen) {
+      currentCard.classList.remove('services-close')
+      currentCard.classList.add('services-open')
+      currentInfo.style.height = currentInfo.scrollHeight + 'px'
+    }
+  })
 })
+
 
 /*=============== TESTIMONIALS OF DUPLICATE CARDS ===============*/
 

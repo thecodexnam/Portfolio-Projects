@@ -866,7 +866,8 @@ img {
   }
 
   .about__container,
-  .about__container{
+  .about__container,
+  .services-containers{
     grid-template-columns: 460px;
     justify-content: center;
   }
@@ -903,11 +904,22 @@ img {
     padding-left: 0;
   }
 
-  /* .work__card{
+  /* .work__line{
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+  } */
+
+  .work__card{
     grid-template-columns: repeat(2,270px);
     justify-content: center;
     column-gap: 3rem;
-  } */
+  }
+
+  .services__container{
+    grid-template-columns: repeat(2,350px);
+    align-items: flex-start;
+  }
 }
 
 /* For large devices */
