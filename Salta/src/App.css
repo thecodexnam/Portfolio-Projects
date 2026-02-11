@@ -1,52 +1,126 @@
-.main{
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  flex-direction: column;
-  padding: 10px;
-  gap: 10px;
+.main {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0d0d0d;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center everything vertically */
+    flex-direction: column;
+    padding: 20px;
+    gap: 30px;
+    font-family: 'Nunito Sans', sans-serif;
+    color: white;
 }
 
-#salta{
-  height:70%;
-  width: auto;
-  object-fit: contain;
-  margin-top: 20px;
+#salta {
+    height: 40vh; /* Responsive height */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(85, 247, 255, 0.5));
+    animation: float 6s ease-in-out infinite;
 }
 
-span{
-  background: linear-gradient(to right, rgb(170, 79, 195), rgb(169, 96, 96));
-  font-size: 4vmax;
-  background-clip: text;
-  color: transparent;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 900;
-  text-align: center;
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
 }
 
-button{
-  width:180px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  font-size: 20px;
-  border-radius: 20px;
-  border: none;
-  font-weight: 900;
-  background-color: rgb(146, 190, 192);
-  box-shadow: 2px 2px 100px  rgb(85, 247, 255);
-  color: black;
-  transition: all 0.3s ease-in-out;
+span {
+    background: linear-gradient(to right, #aa4fc3, #55f7ff);
+    font-size: 3rem;
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 1px;
 }
 
-button:hover{
-  cursor: pointer;
-  background-color: rgb(85, 247, 255);
-  box-shadow: 2px 2px 100px  rgb(146, 190, 192);
+.interaction-container {
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.mic-btn {
+    background-color: #55f7ff;
+    color: #0d0d0d;
+    box-shadow: 0 0 20px rgba(85, 247, 255, 0.4);
+}
+
+.mic-btn:hover {
+    background-color: #92bec0;
+    box-shadow: 0 0 30px rgba(85, 247, 255, 0.6);
+    transform: scale(1.05);
+}
+
+.mic-btn.listening {
+    background-color: #ff5555;
+    box-shadow: 0 0 20px rgba(255, 85, 85, 0.6);
+    animation: pulse 1.5s infinite;
+}
+
+.stop-btn {
+    background-color: #ff5555;
+    color: white;
+    box-shadow: 0 0 20px rgba(255, 85, 85, 0.4);
+}
+
+.stop-btn:hover {
+    background-color: #ff3333;
+    transform: scale(1.05);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 85, 85, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 85, 85, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 85, 85, 0); }
+}
+
+.conversation-box {
+    width: 90%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.user-prompt, .ai-response {
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.user-prompt {
+    color: #aaaaaa;
+    font-style: italic;
+    border-left: 3px solid #55f7ff;
+    padding-left: 10px;
+}
+
+.ai-response {
+    color: white;
+    font-weight: 500;
 }
