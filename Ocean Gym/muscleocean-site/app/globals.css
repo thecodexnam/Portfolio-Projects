@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #f8fafc;
+  --ocean-blue: #0ea5e9;
+  --ocean-teal: #14b8a6;
+  --ocean-indigo: #6366f1;
+  --dark-bg: #0a0a0a;
+  --card-bg: rgba(15, 15, 15, 0.7);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --accent-glow: rgba(14, 165, 233, 0.15);
+
+  /* New Spacing Tokens */
+  --section-padding-y: 6rem;
+  --section-padding-y-lg: 10rem;
+  --container-px: 1rem;
+  --container-px-sm: 1.5rem;
+  --container-px-lg: 2rem;
+}
+
+/* @theme is handled by Tailwind PostCSS plugin */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ocean-blue: var(--ocean-blue);
+  --color-ocean-teal: var(--ocean-teal);
+  --color-ocean-indigo: var(--ocean-indigo);
+  --color-dark-bg: var(--dark-bg);
+  --color-card-bg: var(--card-bg);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Montserrat', system-ui, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Smooth transitions - only interactive elements to avoid layout jank */
+a,
+button {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.glass {
+  background: rgba(15, 15, 15, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #0ea5e9 0%, #14b8a6 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Unified form field styling */
+.input-field {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  color: var(--foreground);
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--ocean-blue);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+
+.input-field option {
+  background: var(--dark-bg);
+  color: var(--foreground);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ocean-blue);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ocean-teal);
+}
+
+/* Layout Utilities */
+.section-padding {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: var(--section-padding-y-lg);
+    padding-bottom: var(--section-padding-y-lg);
+  }
+}
+
+.container-tight {
+  max-width: 64rem;
+  /* 1024px */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-px);
+  padding-right: var(--container-px);
+}
+
+.container-wide {
+  max-width: 80rem;
+  /* 1280px */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-px);
+  padding-right: var(--container-px);
+}
+
+@media (min-width: 640px) {
+
+  .container-tight,
+  .container-wide {
+    padding-left: var(--container-px-sm);
+    padding-right: var(--container-px-sm);
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .container-tight,
+  .container-wide {
+    padding-left: var(--container-px-lg);
+    padding-right: var(--container-px-lg);
+  }
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  h1 {
+    line-height: 1.1;
+  }
+
+  /* Better touch targets on mobile */
+  button,
+  a {
+    min-height: 44px;
+  }
+}
