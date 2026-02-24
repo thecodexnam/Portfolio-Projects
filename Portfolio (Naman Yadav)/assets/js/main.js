@@ -151,11 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
       delay: 400,
     })
 
-    sr.reveal(`.home__data, .home__image, .about__data, .about__image, .services__card, .projects__card, .work__card, .testimonials__card, .contact__container, .footer__container`)
+    sr.reveal(`.home__data, .home__image, .about__data, .about__image, .services__card, .projects__container, .work__container, .testimonials__card, .contact__container, .footer__container`)
     sr.reveal(`.home__info`, { origin: 'bottom' })
     sr.reveal(`.home__social-link`, { interval: 100 })
     sr.reveal(`.about__description, .about__perfil`, { origin: 'right' })
     sr.reveal(`.about__data, .about__img`, { origin: 'left' })
-    sr.reveal(`.services__card, .projects__card`, { interval: 100 })
+    sr.reveal(`.services__card`, { interval: 100 })
   }
 });
