@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  let navigate = useNavigate()
-  let [input, setInput] = useState("");
-  console.log(input);
+  let navigate = useNavigate();
+  const[input,setInput] = useState("");
 
   const handleJoin = () => {
-    navigate(`/room/${input}`)
-  }
+    if(input.trim() !== "") {
+      navigate(`/room/${input}`);
+    }
+  };
 
   return (
     <div className="home-container">
@@ -28,6 +29,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+
   );
 };
 
