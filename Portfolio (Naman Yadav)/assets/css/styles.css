@@ -878,12 +878,35 @@ img {
   align-items: center;
   column-gap: .5rem;
   margin-bottom: .5rem;
+  margin-bottom: .5rem;
 }
 
+.testimonials__stars{
+  display: flex;
+  column-gap: .25rem;
+}
 
+.testimonials__stars i{
+  font-size: 1rem;
+  color: var(--title-color);
+}
 
+.testimonials__number{
+  font-size: var(--h3-font-size);
+}
+
+.testimonials__content{
+  display: flex;
+  width: max-content;
+  animation: scroll 18s linear infinite;
+}
+
+.testimonials__reverse{
+  /* flex-direction: row-reverse; */
+}
 
 /* Infinite scroll animation */
+@keyframes
 
 /*=============== CONTACT ===============*/
 
