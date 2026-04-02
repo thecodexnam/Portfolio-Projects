@@ -11,18 +11,18 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [selectedRole, setSelectedRole] = useState('Customer')
   const navigate = useNavigate();
-  const[fullName,setFullName] = useState("")
-  const[email,setEmail] = useState("")
-  const[phone,setPhone] = useState("")
-  const[password,setPassword] = useState("")
-  const[error,setError] = useState("")
+  const [fullName, setFullName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
 
-  const handleGoogleSignIn = async () =>{
-    if(!phone){
+  const handleGoogleSignIn = async () => {
+    if (!phone) {
       setError("Mobile no is required before Google Sign-In");
       return;
     }
-    
+
     const roleMap = {
       "Customer": "user",
       "Delivery Partner": "deliveryBoy",
@@ -31,15 +31,15 @@ const SignUp = () => {
 
     try {
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth,provider)
-      
-      const {data} = await axios.post(`${serverUrl}/api/auth/google-auth`,{
+      const result = await signInWithPopup(auth, provider)
+
+      const { data } = await axios.post(`${serverUrl}/api/auth/google-auth`, {
         fullName: result.user.displayName,
         email: result.user.email,
         role: roleMap[selectedRole] || "user",
         mobile: phone
-      },{withCredentials:true})
-      
+      }, { withCredentials: true })
+
       console.log("Google Sign-In Success:", data);
       navigate("/");
     } catch (error) {
@@ -112,8 +112,8 @@ const SignUp = () => {
               type="text"
               id="name"
               name="name"
-              onChange={(e)=>setFullName(e.target.value)}
-              placeholder='John Doe'
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder='naman'
               className='w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:bg-white focus:border-green-500 focus:outline-none focus:ring-4 focus:ring-green-50 transition-all duration-200 text-gray-900 placeholder-gray-400'
             />
           </div>
@@ -127,7 +127,7 @@ const SignUp = () => {
               type="email"
               id="email"
               name="email"
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder='you@example.com'
               className='w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:bg-white focus:border-green-500 focus:outline-none focus:ring-4 focus:ring-green-50 transition-all duration-200 text-gray-900 placeholder-gray-400'
             />
@@ -142,7 +142,7 @@ const SignUp = () => {
               type="text"
               id="phone"
               name="phone"
-              onChange={(e)=>setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
               placeholder='1234567890'
               className='w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:bg-white focus:border-green-500 focus:outline-none focus:ring-4 focus:ring-green-50 transition-all duration-200 text-gray-900 placeholder-gray-400'
             />
@@ -162,7 +162,7 @@ const SignUp = () => {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 className="w-full px-4 py-3 pr-12 bg-gray-50 border-2 border-gray-200 rounded-xl focus:bg-white focus:border-green-500 focus:outline-none transition-all"
               />
@@ -206,7 +206,7 @@ const SignUp = () => {
 
           {/* Google SignUp */}
           <button
-          onClick={handleGoogleSignIn}
+            onClick={handleGoogleSignIn}
             type="button"
             className='w-full px-4 py-3 bg-white text-green-600 font-bold rounded-xl shadow-lg hover:shadow-xl hover:from-green-700 hover:to-green-600 active:scale-95 transition-all duration-200 text-base tracking-wide'
           >
