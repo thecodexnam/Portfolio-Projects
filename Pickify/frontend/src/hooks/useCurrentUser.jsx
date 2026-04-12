@@ -1,33 +1,38 @@
-import { useEffect } from 'react'
-import axios from 'axios'
-import { serverUrl } from '../App'
-import { useDispatch } from 'react-redux'
-import { setUser, setLoading, setError } from '../redux/userSlice'
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { serverUrl } from "../config";
+import { clearUser, setError, setLoading, setUser } from "../redux/userSlice";
 
 const useCurrentUser = () => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth);
 
-    useEffect(() => {
-        const fetchCurrentUser = async () => {
-            dispatch(setLoading(true))
-            try {
-                const res = await axios.get(`${serverUrl}/api/user/current-user`, {
-                    withCredentials: true
-                })
-                dispatch(setUser(res.data))
-            } catch (err) {
-                if (err.response && err.response.status === 401) {
-                    dispatch(setUser(null))
-                } else {
-                    console.error("Error fetching current user:", err)
-                    dispatch(setError(err.message))
-                }
-            } finally {
-                dispatch(setLoading(false))
-            }
+  useEffect(() => {
+    const fetchUser = async () => {
+      dispatch(setLoading(true));
+
+      try {
+        const { data } = await axios.get(`${serverUrl}/api/user/current-user`, {
+          withCredentials: true,
+        });
+
+        console.log("Logged in user:", data);
+        dispatch(setUser(data));
+      } catch (error) {
+        if (error.response?.status === 400 || error.response?.status === 401) {
+          dispatch(clearUser());
+          return;
         }
-        fetchCurrentUser()
-    }, [dispatch])
-}
 
-export default useCurrentUser
+        dispatch(setError(error.response?.data?.message || error.message));
+      }
+    };
+
+    fetchUser();
+  }, [dispatch]);
+
+  return authState;
+};
+
+export default useCurrentUser;
