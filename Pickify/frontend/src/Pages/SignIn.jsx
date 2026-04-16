@@ -3,9 +3,11 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { serverUrl } from "../App";
+import { serverUrl } from "../config";
 import { auth } from "../../firebase"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/userSlice";
 
 
 const SignIn = () => {
@@ -14,6 +16,7 @@ const SignIn = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleGoogleSignIn = async () => {
     try {
@@ -26,6 +29,7 @@ const SignIn = () => {
         role: "user",
         mobile: ""
       }, { withCredentials: true })
+      dispatch(setUser(data))
 
       console.log("Google Sign-In Success:", data);
       navigate("/");
