@@ -26,6 +26,10 @@ const shopSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    pincode:{
+        type:String,
+        required:true
+    },
     items:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Item"
