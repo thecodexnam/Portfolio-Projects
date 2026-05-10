@@ -6,6 +6,8 @@ const userSlice = createSlice({
     userData: null,
     loading: true,
     error: null,
+    city: null,
+    searchTerm: ''
   },
   reducers: {
     setUser: (state, action) => {
@@ -24,9 +26,17 @@ const userSlice = createSlice({
       state.userData = null;
       state.loading = false;
       state.error = null;
+      state.city = null;
+    },
+    setCity: (state, action) => {
+      state.city = action.payload;
+    },
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
     },
   },
 });
 
-export const { setUser, setLoading, setError, clearUser } = userSlice.actions;
+export const { setUser, setLoading, setError, clearUser, setCity, setSearchTerm } = userSlice.actions;
 export default userSlice.reducer;
+
