@@ -6,11 +6,14 @@ import axios from "axios";
 import { serverUrl } from "../config";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/userSlice";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [selectedRole, setSelectedRole] = useState('Customer')
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -39,6 +42,7 @@ const SignUp = () => {
         role: roleMap[selectedRole] || "user",
         mobile: phone
       }, { withCredentials: true })
+      dispatch(setUser(data))
 
       console.log("Google Sign-In Success:", data);
       navigate("/");
@@ -68,6 +72,7 @@ const SignUp = () => {
       }, {
         withCredentials: true
       })
+      dispatch(setUser(res.data))
       console.log(res.data)
       navigate("/signin")
     } catch (error) {
