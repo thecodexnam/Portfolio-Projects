@@ -112,6 +112,7 @@ const CreateEditShopPage = () => {
             
             if (response.data.shop) {
                 dispatch(setMyShopData(response.data.shop))
+                console.log("Shop data saved successfully", response.data.shop);
                 navigate('/owner')
             }
         } catch (err) {
