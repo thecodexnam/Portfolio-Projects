@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { serverUrl } from "../config";
 import { auth } from "../../firebase"
@@ -132,7 +132,7 @@ const SignIn = () => {
 
           {/* Forget Password */}
           <div className='flex justify-end'>
-            <a href="#" className='text-sm text-green-600 hover:text-green-700 font-medium transition-colors' onClick={()=>navigate("/forget-password")}>Forgot Password?</a>
+            <Link to="/forget-password" className='text-sm text-green-600 hover:text-green-700 font-medium transition-colors'>Forgot Password?</Link>
           </div>
 
           {/* Submit Button */}
@@ -157,7 +157,7 @@ const SignIn = () => {
         {/* Footer */}
         <p className='text-center text-gray-600 text-md mt-2'>
           Don't have an account?
-          <a href="#" className='font-semibold text-green-600 hover:text-green-700 ml-1 transition-colors' onClick={() => navigate("/signup")}>Sign Up</a>
+          <Link to="/signup" className='font-semibold text-green-600 hover:text-green-700 ml-1 transition-colors'>Sign Up</Link>
         </p>
       </div>
     </div>  
