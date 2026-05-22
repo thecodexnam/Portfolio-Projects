@@ -17,8 +17,12 @@ const useCurrentUser = () => {
           withCredentials: true,
         });
 
-        console.log("Logged in user:", data);
-        dispatch(setUser(data));
+        console.log("Logged in user:", data.user);
+        if (data.user) {
+          dispatch(setUser(data.user));
+        } else {
+          dispatch(clearUser());
+        }
       } catch (error) {
         if (error.response?.status === 400 || error.response?.status === 401) {
           dispatch(clearUser());
