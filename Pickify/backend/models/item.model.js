@@ -69,6 +69,11 @@ const itemSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    foodType: {
+        type: String,
+        enum: ['veg', 'nonveg'],
+        default: 'veg'
+    },
 })
 
 const Item = mongoose.model("Item", itemSchema);
