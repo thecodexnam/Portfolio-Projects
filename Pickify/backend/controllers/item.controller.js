@@ -5,7 +5,7 @@ import uploadOnCloudinary from "../utils/cloudinary.js";
 
 export const addItem = async (req, res) => {
     try {
-        let {name, category, description, price, discountPrice, inStock, weight, variants} = req.body;
+        let {name, category, foodType, description, price, discountPrice, inStock, weight, variants} = req.body;
         
         if (variants && typeof variants === 'string') {
             variants = JSON.parse(variants);
@@ -33,6 +33,7 @@ export const addItem = async (req, res) => {
             discountPrice: discountPrice || 0,
             inStock: inStock !== undefined ? inStock : true,
             category,
+            foodType: foodType || 'veg',
             description,
             weight: weight || "",
             variants: variants || [],
@@ -50,7 +51,7 @@ export const addItem = async (req, res) => {
 
 export const editItem = async (req, res) => {
     try {
-        let {name, category, description, price, discountPrice, inStock, weight, variants} = req.body;
+        let {name, category, foodType, description, price, discountPrice, inStock, weight, variants} = req.body;
         
         if (variants && typeof variants === 'string') {
             variants = JSON.parse(variants);
@@ -78,6 +79,7 @@ export const editItem = async (req, res) => {
 
         if(name) item.name = name;
         if(category) item.category = category;
+        if(foodType && foodType !== 'undefined') item.foodType = foodType;
         if(description) item.description = description;
         if(price) item.price = price;
         if(discountPrice !== undefined) item.discountPrice = discountPrice;
