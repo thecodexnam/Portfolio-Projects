@@ -161,6 +161,11 @@ export const resetPassword = async (req,res) =>{
 export const googleAuth = async (req,res) =>{
     try {
         let {email,mobile,fullName,role} = req.body;
+        
+        if (!email) {
+            return res.status(400).json({message: "Google Auth failed: No email provided."});
+        }
+
         email = email.toLowerCase().trim();
         let user = await User.findOne({email})
         
@@ -194,6 +199,6 @@ export const googleAuth = async (req,res) =>{
 
     } catch (error) {
         console.error("Google Auth Error:", error);
-        return res.status(500).json({message: `Google Auth error`, error: error.message})
+        return res.status(500).json({message: error.message || `Google Auth error`})
     }
 }
