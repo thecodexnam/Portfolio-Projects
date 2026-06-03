@@ -43,7 +43,7 @@ export const createAndUpdateShop = async (req, res) => {
       shop = await Shop.findByIdAndUpdate(shop._id, updateData, { new: true });
     }
 
-    await shop.populate("owner");
+    await shop.populate("owner items");
     return res.status(isNew ? 201 : 200).json({ shop });
   } catch (error) {
     return res.status(500).json({ message: `create shop error ${error}` });
@@ -53,7 +53,7 @@ export const createAndUpdateShop = async (req, res) => {
 
 export const getShop = async (req, res) => {
     try {
-        const shop = await Shop.findOne({ owner: req.userId }).populate("items");
+        const shop = await Shop.findOne({ owner: req.userId }).populate("owner items");
         if (!shop) {
             return res.status(200).json({message: "No shop created", shop: null });
         }
@@ -65,7 +65,7 @@ export const getShop = async (req, res) => {
 
 export const getAllShops = async (req, res) => {
     try {
-        const shops = await Shop.find().populate("owner", "name email");
+        const shops = await Shop.find().populate("owner items", "name email");
         return res.status(200).json({ shops });
     } catch (error) {
         return res.status(500).json({ message: `get all shops error ${error}` });
@@ -75,7 +75,7 @@ export const getAllShops = async (req, res) => {
 export const getShopById = async (req, res) => {
     try {
         const { id } = req.params;
-        const shop = await Shop.findById(id).populate("items");
+        const shop = await Shop.findById(id).populate("owner items");
         if (!shop) {
             return res.status(404).json({ message: "Shop not found" });
         }
