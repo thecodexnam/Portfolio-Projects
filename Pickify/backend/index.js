@@ -5,7 +5,10 @@ import connectDB from './config/db.js'
 import cookieParser from 'cookie-parser'
 import authRouter from './routes/auth.routes.js'
 import userRouter from './routes/user.routes.js'
+import shopRouter from './routes/shop.routes.js'
 import cors from "cors"
+import itemRouter from './routes/item.routes.js'
+import orderRouter from './routes/order.routes.js'
 
 
 let app = express()
@@ -18,6 +21,9 @@ app.use(express.json())
 app.use(cookieParser())
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
+app.use("/api/shop",shopRouter) 
+app.use("/api/item",itemRouter)
+app.use("/api/order",orderRouter)
 
 app.get('/', (req,res)=>{
     res.send("This is the home page of our Server")
@@ -27,3 +33,5 @@ app.listen(port,()=>{
     console.log(`The server is run on port:${port}`);
     connectDB()
 })
+
+// Force restart
